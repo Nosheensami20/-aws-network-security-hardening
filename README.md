@@ -36,31 +36,31 @@ This project demonstrates the implementation of a comprehensive, multi-layered A
 ### Phase I: Network Foundation
 **What we built:** VPC, Subnets, IGW, NAT Gateway, Route Tables
 
-✅ Created an isolated VPC (10.0.0.0/16) with public/private subnet segmentation
-✅ Configured Internet Gateway for public subnet internet access
-✅ Deployed NAT Gateway to enable secure outbound traffic from private subnets
-✅ Established proper routing tables for controlled traffic flows
+- Created an isolated VPC (10.0.0.0/16) with public/private subnet segmentation
+- Configured Internet Gateway for public subnet internet access
+- Deployed NAT Gateway to enable secure outbound traffic from private subnets
+- Established proper routing tables for controlled traffic flows
 
 👉 [View detailed guide](docs/phase-1-network-foundation.md)
 
 ### Phase II: Security Hardening
 **What we hardened:** Security Groups, NACLs
 
-✅ Audited and hardened Security Groups following least-privilege principles
-✅ Restricted NACLs to allow only necessary traffic (SSH from admin IP, HTTP/HTTPS)
-✅ Eliminated overly permissive default security configurations
-✅ Verified no resources remain under insecure default security groups
+- Audited and hardened Security Groups following least-privilege principles
+- Restricted NACLs to allow only necessary traffic (SSH from admin IP, HTTP/HTTPS)
+- Eliminated overly permissive default security configurations
+- Verified no resources remain under insecure default security groups
 
 👉 [View detailed guide](docs/phase-2-security-hardening.md)
 
 ### Phase III: WAF & ALB Protection
 **What we deployed:** ALB, WAF, CloudWatch logging
 
-✅ Deployed Application Load Balancer with AWS WAF protection
-✅ Configured managed rule groups to block common web exploits (SQL injection, anonymous IPs, known bad inputs)
-✅ Successfully blocked real-world attack attempts with 403 responses
-✅ Implemented CloudWatch logging for threat monitoring and audit trails
-✅ Hardened security groups to restrict EC2 access exclusively through ALB
+- Deployed Application Load Balancer with AWS WAF protection
+- Configured managed rule groups to block common web exploits (SQL injection, anonymous IPs, known bad inputs)
+- Successfully blocked real-world attack attempts with 403 responses
+- Implemented CloudWatch logging for threat monitoring and audit trails
+- Hardened security groups to restrict EC2 access exclusively through ALB
 
 👉 [View detailed guide](docs/phase-3-waf-alb.md)
 
@@ -76,10 +76,10 @@ Successfully blocked actual attacks:
 - Action: BLOCK (403 Forbidden)
 
 ## Project Achievments:
-✅ Defense-in-depth architecture
-✅ Real-time threat detection and blocking
-✅ Comprehensive audit logging
-✅ Zero-trust network segmentation
+- Defense-in-depth architecture
+- Real-time threat detection and blocking
+- Comprehensive audit logging
+- Zero-trust network segmentation
 
 ## Cleanup:
 To avoid unexpected AWS charges, remove all resources (VPC, subnets, NAT Gateway, ALB, EC2, RDS, CloudWatch logs) created for this project after testing.
