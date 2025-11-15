@@ -20,7 +20,7 @@ This project demonstrates the implementation of a comprehensive, multi-layered A
 - Deploy WAF for application-layer protection
 
 ## Project Structure: 
-
+```
 ├── README.md                           # Project overview
 ├── images/
 │   └── architecture-diagram.png        # Architecture diagram
@@ -30,7 +30,7 @@ This project demonstrates the implementation of a comprehensive, multi-layered A
 │   └── phase-3-waf-alb.md
 │── screenshots/                        # Visual proof  
 │── scripts                             # Configuration files
-
+```
 ## Implementation Phases
 
 ### Phase I: Network Foundation
