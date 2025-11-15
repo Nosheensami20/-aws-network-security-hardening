@@ -1,0 +1,61 @@
+{
+  "Name": "network-harden-waf-webacl",
+  "Scope": "REGIONAL",
+  "DefaultAction": { "Allow": {} },
+  "Description": "Phase 3 baseline WAF - managed rules for common protections",
+  "VisibilityConfig": {
+    "SampledRequestsEnabled": true,
+    "CloudWatchMetricsEnabled": true,
+    "MetricName": "networkHardenWebACL"
+  },
+  "Rules": [
+    {
+      "Name": "AWSCommonRuleSet",
+      "Priority": 0,
+      "Statement": {
+        "ManagedRuleGroupStatement": {
+          "VendorName": "AWS",
+          "Name": "AWSManagedRulesCommonRuleSet"
+        }
+      },
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "awsCommonRuleSet"
+      },
+      "OverrideAction": { "None": {} }
+    },
+    {
+      "Name": "AWSAnonymousIPList",
+      "Priority": 1,
+      "Statement": {
+        "ManagedRuleGroupStatement": {
+          "VendorName": "AWS",
+          "Name": "AWSManagedRulesAnonymousIpList"
+        }
+      },
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "awsAnonymousIPList"
+      },
+      "OverrideAction": { "None": {} }
+    },
+    {
+      "Name": "AWSKnownBadInputs",
+      "Priority": 2,
+      "Statement": {
+        "ManagedRuleGroupStatement": {
+          "VendorName": "AWS",
+          "Name": "AWSManagedRulesKnownBadInputsRuleSet"
+        }
+      },
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "awsKnownBadInputs"
+      },
+      "OverrideAction": { "None": {} }
+    }
+  ]
+}

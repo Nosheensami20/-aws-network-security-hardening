@@ -1,0 +1,29 @@
+[
+  {
+    "NetworkAclId": "acl---",
+    "RuleNumber": 100,
+    "Protocol": "6",
+    "RuleAction": "allow",
+    "Egress": false,
+    "CidrBlock": "IP-address",
+    "PortRange": { "From": 22, "To": 22 }
+  },
+  {
+    "NetworkAclId": "acl---",
+    "RuleNumber": 110,
+    "Protocol": "6",
+    "RuleAction": "allow",
+    "Egress": false,
+    "CidrBlock": "0.0.0.0/0",
+    "PortRange": { "From": 80, "To": 80 }
+  },
+  {
+    "NetworkAclId": "acl---",
+    "RuleNumber": 120,
+    "Protocol": "6",
+    "RuleAction": "allow",
+    "Egress": false,
+    "CidrBlock": "0.0.0.0/0",
+    "PortRange": { "From": 443, "To": 443 }
+  }
+]

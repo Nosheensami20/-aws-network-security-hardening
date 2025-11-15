@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AWSWAFCreateLogStream",
+      "Effect": "Allow",
+      "Principal": { "Service": "waf.amazonaws.com" },
+      "Action": [ "logs:CreateLogStream" ],
+      "Resource": "arn:aws:logs:ca-central-1:<account ID>:log-group:aws-waf-logs-network-harden:*"
+    },
+    {
+      "Sid": "AWSWAFPutLogEvents",
+      "Effect": "Allow",
+      "Principal": { "Service": "waf.amazonaws.com" },
+      "Action": [ "logs:PutLogEvents" ],
+      "Resource": "arn:aws:logs:ca-central-1:<account ID>:log-group:aws-waf-logs-network-harden:*"
+    }
+  ]
+}

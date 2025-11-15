@@ -1,0 +1,6 @@
+{
+  "ResourceArn": "arn:aws:wafv2:ca-central-1:<account ID>:regional/webacl/network-harden-waf-webacl/--",
+  "LogDestinationConfigs": [
+    "arn:aws:logs:ca-central-1:<Account ID>:log-group:aws-waf-logs-network-harden"
+  ]
+}
