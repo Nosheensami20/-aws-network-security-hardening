@@ -1,4 +1,5 @@
-**Phase I: Network Foundation (Building a Secure VPC):**
+# Phase I: Network Foundation (Building a Secure VPC)
+
 The first phase of our project is to build a private, segmented AWS network with proper routing and connectivity. We developed a two-tier network — public layer (internet-facing) and private layer (internal systems).
 
 ### Step 1: Create IAM User and Attach Policy
