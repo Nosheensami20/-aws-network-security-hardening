@@ -3,8 +3,9 @@ The first phase of our project is to build a private, segmented AWS network with
 
 ### Step 1: Create IAM User and Attach Policy
 
-- Created the user "networkengineer".
-- Created IAM policy and attached policy to the user. 
+- Created the user ```aws iam create-user --user-name networkengineer --profile demoadmin```
+- Created IAM policy ```aws iam create-policy --policy-name NetworkEngineerPolicy --policy-document file://Network Hardening/networkengineer-user-policy.json --profile demoadmin```
+- Attached policy to the user 'networkengineer' ```aws iam attach-user-policy --user-name networkengineer --policy-arn arn:aws:iam::<YOUR_ACCOUNT_ID>:policy/NetworkEngineerPolicy --profile demoadmin```
 - Created access keys and configured the networkengineer AWS CLI profile.
 
 ### Step 2: Create a VPC
