@@ -1,4 +1,4 @@
-# Phase III: WAF Protection & ALB Hardening:
+# Phase III: WAF Protection & ALB Hardening
 
 In this phase, we deployed an Application Load Balancer (ALB) and protected it using AWS WAF.
 We configured managed rule groups to block common web exploits, enabled CloudWatch logging, and confirmed that malicious requests were successfully blocked with 403 Forbidden.
