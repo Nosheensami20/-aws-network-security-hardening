@@ -79,10 +79,10 @@ Inbound:   HTTP 80 → Source: sg-alb
 Outbound:  Allow all (default)
 
 **Achievements:**
-✅ WAF successfully blocking real attacks (403 responses)
-✅ CloudWatch logging capturing threat intelligence
-✅ EC2 instances secured behind ALB
-✅ Defense-in-depth architecture complete
+- WAF successfully blocking real attacks (403 responses)
+- CloudWatch logging capturing threat intelligence
+- EC2 instances secured behind ALB
+- Defense-in-depth architecture complete
 
 **Security Posture:**
 - Application layer protected by WAF with managed rules
