@@ -4,7 +4,7 @@ Restrict who and what can access your VPC and its resources. Only necessary traf
 Implements “least privilege network access.”
 
 ### Step 8: Security Groups Hardening and Auditing
-
+This step includes checking status of existing SGs, harden it, and deploy public and private subnets. 
 ### 8.1: Check the status of Existing SGs
 
 Check the status of SGs that exist in our VPC for any overly permissive access like SSH or RDP from 0.0.0.0/0
@@ -12,14 +12,14 @@ Check the status of SGs that exist in our VPC for any overly permissive access l
 ```aws ec2 describe-security-groups --filters "Name=vpc-id,Values=vpc-<VPC-ID>" --profile networkengineer --region ca-central-1 --query "SecurityGroups[*].{Name:GroupName,ID:GroupId,Description:Description}" --output table```
 
 Expected output:
-
-                 DescribeSecurityGroups                      |
+```
+                 DescribeSecurityGroups                      
 +-----------------------------+------------------------+----------+
 |         Description         |          ID            |  Name    |
 +-----------------------------+------------------------+----------+
 |  default VPC security group |  sg-00000000000000000  |  default |
 +-----------------------------+------------------------+----------+
-
+```
 The output shows only a default SG that exists in the VPC which has following configurations by default:
 
 - All inbound traffic is allowed from the same SG (all instances within the same SG may talk freely) which is not ideal when we want to keep the instances isolated. 
@@ -45,6 +45,7 @@ Verify:
 ```aws ec2 describe-security-groups --group-ids sg-ID --profile networkengineer --region ca-central-1 --query "SecurityGroups[0].IpPermissions" --output json```
 
 Expected Output includes:
+```
       "IpProtocol": "tcp",
         "FromPort": 80,
         "ToPort": 80,
@@ -57,10 +58,8 @@ Expected Output includes:
         "FromPort": 443,
         "ToPort": 443,
          "CidrIp": "0.0.0.0/0"
-     
-
+   ```  
 ### 8.3: Create a private SG
-
 ```cmd /v:on /c "for /f "delims=" %i in ('aws ec2 create-security-group --group-name network-hardening-private-sg --description "Private SG for internal resources (restrict access to public SG)" --vpc-id <vpc-ID> --profile networkengineer --region ca-central-1 --query "GroupId" --output text') do (set PRIVSG=%i & echo PRIVSG=!PRIVSG!)"```
 
 Expected output:
@@ -70,12 +69,12 @@ PRIVSG=sg-ID
 ```aws ec2 authorize-security-group-ingress --group-id sg-ID --protocol tcp --port 0-65535 --source-group <sg-ID> --profile networkengineer --region ca-central-1```
 
 Expected output includes:
-
+```
             "SecurityGroupRuleId": "sgr-ID",
             "IpProtocol": "tcp",
             "FromPort": 0,
             "ToPort": 65535,
-      
+ ```     
 - Allow the private SG to accept traffic from the public SG
 
 For now we’ll allow all TCP from the public SG as an internal trust rule (you can and should tighten to specific ports later — e.g., 8080, 3306, etc.).
@@ -83,29 +82,19 @@ For now we’ll allow all TCP from the public SG as an internal trust rule (you 
 ```aws ec2 authorize-security-group-ingress --group-id <PRIVSG_ID> --protocol tcp --port 0-65535 --source-group sg-ID --profile networkengineer --region ca-central-1```
 
 Output:
-
 ```An error occurred (InvalidPermission.Duplicate) when calling the AuthorizeSecurityGroupIngress operation: the specified rule "peer: <sg-ID>, TCP, from port: 0, to port: 65535, ALLOW" already exists```
 (This message confirms the rule already existed — no further action required.)
 
 Verify: 
 ```aws ec2 describe-security-groups --group-ids sg-ID --profile networkengineer --region ca-central-1 --query "SecurityGroups[0].IpPermissions" --output json```
-[
-    {
+```   
         "IpProtocol": "tcp",
         "FromPort": 0,
         "ToPort": 65535,
-        "UserIdGroupPairs": [
-            {
-                "UserId": "ID",
-                "GroupId": "sg-ID"
-            }
-        ],
-        "IpRanges": [],
-        "Ipv6Ranges": [],
-        "PrefixListIds": []
-    }
-]
-
+        "UserIdGroupPairs":
+        "UserId": "ID",
+         "GroupId": "sg-ID"
+```
 ### 8.4: Tightening rules for Private SG
 
 The private SG currently allows all TCP (0-65535) from the public SG, but we replaced the broad rule with only specified required ports. 
@@ -202,7 +191,7 @@ Last step is to verify the rules have been applied correctly:
 
 The table below shows the final NACL rules after hardening:
 
-| RuleNumber | Egress | Protocol | PortRange | CidrBlock       | RuleAction |
+| RuleNumber | Egress | Protocol | PortRange | CidrBlock     | RuleAction |
 |------------|--------|---------|-----------|----------------|------------|
 | 100        | False  | 6       | 22        | IP/32          | allow      |
 | 110        | False  | 6       | 80        | 0.0.0.0/0      | allow      |
