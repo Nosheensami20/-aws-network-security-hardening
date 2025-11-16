@@ -115,6 +115,7 @@ Expected Output:
 ```aws ec2 describe-route-tables --route-table-ids <ID>--profile networkengineer --region ca-central-1 --query "RouteTables[0].Associations" --output json```
 
 Expected Output includes:
+```
             "DestinationCidrBlock": "10.0.0.0/16",
             "GatewayId": "local",
             "State": "active"
@@ -126,7 +127,7 @@ Expected Output includes:
             "RouteTableId": "rtb-ID",
             "SubnetId": "subnet-ID",
             "AssociationState":"associated"
-   
+```   
 ### Step 7: Verify Deployed Resources
 
 - VPC 10.0.0.0/16 — available
